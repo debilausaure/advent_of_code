@@ -8,6 +8,7 @@ fn main() {
                               .filter_map(|res_option_string| res_option_string.ok())
                               .filter_map(|option_string| option_string.parse::<usize>().ok())
                               .collect::<Vec<usize>>();
+        // sort the values
         values.sort_unstable();
 
         //create an iterator that can iterate over the beggining and the end of the vector
@@ -16,13 +17,13 @@ fn main() {
         let mut biggest = double_ended_iter.next_back().unwrap();
 
         while smallest <= biggest {
-            if smallest + biggest <= 2020 {
-                if smallest + biggest == 2020 {
-                    println!("{}", smallest * biggest);
-                    break;
-                } else {
-                    smallest = double_ended_iter.next().unwrap();
-                }
+            let sum = smallest + biggest;
+            if sum == 2020 {
+                println!("{}", smallest * biggest);
+                break;
+            }
+            else if sum < 2020 {
+                smallest = double_ended_iter.next().unwrap();
             } else {
                 biggest = double_ended_iter.next_back().unwrap();
             }
